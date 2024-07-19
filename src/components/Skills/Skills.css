@@ -1,0 +1,36 @@
+.skills-section {
+    background-color:white;
+    padding: 20px 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .skills-section h2{
+    font-weight: 600;
+    font-size: 2rem;
+    padding-bottom: 20px;
+
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+   .skill {
+    font-size: 1.5em;
+    padding: 10px;
+    background-color: rgb(184, 180, 180);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  @media (max-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 15px;
+    }
+  }
+  
+ 
