@@ -36,7 +36,7 @@ const projects = [
     image: project5,
     name: ' My Personal Portfolio',
     sourceCode: '#This is the portfolio',
-    liveDemo: '#'
+    liveDemo: 'https://github.com/Kishore298?tab=repositories'
   }, {
     image: project6,
     name: 'React Filtering System',
