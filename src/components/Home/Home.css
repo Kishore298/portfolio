@@ -1,0 +1,91 @@
+.home-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+  }
+  
+  .home-section h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ff6347;
+  }
+  
+  .home-section h2 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  .home-section p {
+    font-size: 1.5em;
+    max-width: 600px;
+    text-align: center;
+    padding-top: 15px;
+    margin-bottom: 15px;
+  }
+  .typing {
+    display: inline-block; 
+    border-right: 2px solid;
+  }
+  
+  .typing::after {
+    content: '';
+    display: inline-block;
+    animation: blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes blink-caret {
+    from, to {
+      border-color: transparent;
+    }
+    50% {
+      border-color: black; 
+    }
+  }
+  
+  
+  .hire {
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .hire:hover {
+    background-color: darkorange;
+  }
+  .hire a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+  }
+  .download {
+    background-color: orange;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 15px;
+  }
+  
+  .download:hover {
+    background-color: darkorange;
+  }
+  .download a{
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+
+  
+  

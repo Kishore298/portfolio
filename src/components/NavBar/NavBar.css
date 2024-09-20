@@ -1,0 +1,202 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  background-color: black;
+  color: #fff;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100vw;
+  z-index: 999;
+}
+
+  
+  .navbar-title {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  span{
+    color: orange;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    position: relative;
+  }
+  
+  .hamburger svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    fill: #fff;
+    width: 24px;
+    height: 24px;
+  }  
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: orange;
+  }
+  .home-section .nav-link,
+.about-section .nav-link,
+.navbar .active {
+  background-color: orange;
+}
+
+.home-section .nav-link:hover,
+.about-section .nav-link:hover,
+.navbar .active:hover {
+  background-color: darkorange;
+}
+@media (max-width: 768px) {
+  .nav-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 20%;
+    background-color:black;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* Tablet Devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-bar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .home, .about, .skills, .projects, .contact {
+    padding: 40px;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Laptop and Desktop Devices */
+@media (min-width: 1025px) {
+  .nav-bar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .home, .about, .skills, .projects, .contact {
+    padding: 60px;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+/* Landscape Mode */
+@media (orientation: landscape) {
+  .nav-bar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .home, .about, .skills, .projects, .contact {
+    padding: 30px;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}

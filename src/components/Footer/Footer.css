@@ -1,0 +1,25 @@
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p{
+  padding-bottom: 10px;
+}
+
+footer a {
+  color: #ff6347;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+
+
