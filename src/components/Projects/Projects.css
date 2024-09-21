@@ -57,27 +57,5 @@
     padding-left: 10px;
     padding-right: 20px;
   }
-  @media (max-width: 768px) {
-    .project {
-      flex: 1 1 calc(50% - 30px);
-    }
-  }
-  .projects-section h2{
-    padding-bottom: 10px;
-     font-size: 2rem;
-     font-weight: 600;
-     margin-top: 30px;
-}
-  
-  @media (max-width: 480px) {
-    .project {
-      flex: 1 1 100%;
-    }
-  }
-  .projects-section h2{
-    padding-bottom: 10px;
-     font-size: 2rem;
-     font-weight: 600;
-     margin-top: 30px;
-}
+
  

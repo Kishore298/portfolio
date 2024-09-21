@@ -27,7 +27,7 @@ section {
 }
 
 
-@media screen and (max-width: 1201px) {
+@media screen and (max-width: 1275px) {
   .desktop-only {
     display: none;
   }
@@ -70,3 +70,11 @@ section {
     overflow: hidden;
   }
 }
+@media screen and (min-width: 1275px) {
+    .mobile-message{
+        display: none !important;
+    }
+    
+}
+
+
