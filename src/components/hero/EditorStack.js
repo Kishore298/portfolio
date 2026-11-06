@@ -340,7 +340,7 @@ export default function EditorStack() {
         position: 'relative',
         width: '100%',
         maxWidth: '680px',
-        minWidth: '320px',
+        minWidth: '260px',
         height: '380px',
         perspective: '1200px',
       }}
@@ -351,13 +351,14 @@ export default function EditorStack() {
         const relIdx = (i - activeFileIndex + CODE_FILES.length) % CODE_FILES.length;
         const isForeground = relIdx === 0;
 
-        // Visual transforms for genuine stacking depth
-        let xOffset = relIdx * 18;
-        let yOffset = -relIdx * 14;
+        // Visual transforms for genuine stacking depth (compact on mobile to avoid overflow)
+        const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 640;
+        let xOffset = isMobileScreen ? relIdx * 6 : relIdx * 18;
+        let yOffset = isMobileScreen ? -relIdx * 8 : -relIdx * 14;
         let scale = 1 - relIdx * 0.04;
         let opacity = isForeground ? 1 : Math.max(0.18, 0.85 - relIdx * 0.2);
         let zIndex = 10 - relIdx * 2;
-        let rotateY = -relIdx * 2;
+        let rotateY = isMobileScreen ? 0 : -relIdx * 2;
 
         return (
           <motion.div

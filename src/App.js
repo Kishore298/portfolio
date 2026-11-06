@@ -1,5 +1,5 @@
 // src/App.js — Main Developer Portfolio Application
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './index.css';
 
@@ -30,6 +30,28 @@ export default function App() {
     advanceToPhase,
   } = useCinematicOrchestrator();
 
+  // Ensure URL is always clean (http://localhost:3000) with zero hash fragments
+  useEffect(() => {
+    if (window.location.hash) {
+      const hashTarget = window.location.hash.replace('#', '');
+      window.history.replaceState(null, '', window.location.pathname);
+      setTimeout(() => {
+        const target = document.getElementById(hashTarget);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 300);
+    }
+
+    const cleanHash = () => {
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    };
+    window.addEventListener('hashchange', cleanHash);
+    return () => window.removeEventListener('hashchange', cleanHash);
+  }, []);
+
   // "Explore My Work" and intro skip navigate directly to top of Hero section
   const handleExplore = useCallback(() => {
     advanceToPhase(PHASES.PORTFOLIO);
@@ -40,6 +62,9 @@ export default function App() {
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
     }, 100);
   }, [advanceToPhase]);
 
@@ -47,6 +72,9 @@ export default function App() {
     advanceToPhase(PHASES.PORTFOLIO);
     setTimeout(() => {
       document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
     }, 200);
   }, [advanceToPhase]);
 
