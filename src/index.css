@@ -378,3 +378,25 @@ body {
   box-shadow: 0 0 20px var(--cyan-dim);
   transform: translateY(-2px);
 }
+
+/* ===== RESPONSIVE NAVBAR (<= 768px Mobile & Mid Devices) ===== */
+@media (max-width: 768px) {
+  .nav-desktop-links {
+    display: none !important;
+  }
+  .nav-mobile-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-desktop-links {
+    display: flex !important;
+  }
+  .nav-mobile-toggle {
+    display: none !important;
+  }
+  .nav-mobile-menu {
+    display: none !important;
+  }
+}
