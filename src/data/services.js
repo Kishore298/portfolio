@@ -34,7 +34,7 @@ export const SERVICES = [
       'Educational & Training Firms',
     ],
     homeDeliverables: [
-      'Responsive Mobile-First UI (React / Modern HTML5)',
+      'Responsive Mobile-First UI (Next.js / React / Modern Web)',
       'Direct WhatsApp & Lead Capture Contact Forms',
       'Google Maps, Social Links & On-Page SEO Setup',
     ],
@@ -146,7 +146,7 @@ export const SERVICES = [
     faqs: [
       {
         q: 'Do you provide domain name and hosting?',
-        a: 'I assist you in selecting and configuring domain mapping, DNS routing, and hosting (such as cPanel, Hostinger, Vercel, or AWS S3). The hosting account and domain registration are purchased directly under your name for full ownership.',
+        a: 'I assist you in selecting and configuring domain mapping, DNS routing, and hosting (such as cPanel, Hostinger, Vercel, or cloud storage). The hosting account and domain registration are purchased directly under your name for full ownership.',
       },
       {
         q: 'What is your payment schedule?',
@@ -339,7 +339,7 @@ export const SERVICES = [
       'Internal Operations & CRM Workflows',
     ],
     homeDeliverables: [
-      'Tailored React 19 Frontend + Node.js / Express 5 REST API',
+      'Tailored Next.js / React Frontend + Node.js / Express 5 REST API',
       'Role-Based Access Control (Admin, Staff, Manager, Client)',
       'MongoDB Schemas, Automated Background Jobs & Data Pipelines',
     ],
@@ -452,7 +452,7 @@ export const SERVICES = [
     faqs: [
       {
         q: 'What technology stack do you use for web applications?',
-        a: 'I specialize in the MERN ecosystem: React.js (or React 19) on the frontend, Node.js with Express.js for REST APIs, MongoDB with Mongoose for structured databases, and Tailwind CSS for responsive styling.',
+        a: 'I specialize in modern full-stack web development: Next.js and React.js on the frontend, Node.js with Express.js for REST APIs, MongoDB with Mongoose for structured databases, and Tailwind CSS for responsive styling.',
       },
       {
         q: 'Can the application scale as my business grows?',
@@ -577,7 +577,7 @@ export const SERVICES = [
           '30-day post-launch support & updates',
         ],
         deliverables: [
-          'Complete high-performance React source code',
+          'Complete high-performance Next.js / React source code',
           'Vercel / Netlify / Custom server deployment',
           'SEO audit report & social sharing optimization',
         ],
@@ -600,7 +600,7 @@ export const SERVICES = [
     faqs: [
       {
         q: 'Can I host my portfolio for free?',
-        a: 'Yes! Modern React portfolios can be hosted for free on platforms like Vercel, Netlify, or GitHub Pages with zero monthly hosting costs and automatic HTTPS SSL.',
+        a: 'Yes! Modern Next.js and React portfolios can be hosted for free on platforms like Vercel, Netlify, or GitHub Pages with zero monthly hosting costs and automatic HTTPS SSL.',
       },
       {
         q: 'Can I link my own custom domain (e.g. yourname.dev)?',
@@ -677,7 +677,7 @@ export const SERVICES = [
         priceSubtext: 'Starting at',
         recommended: true,
         bestFor: 'Businesses needing a complete visual transformation from scratch into a modern, high-converting digital storefront.',
-        description: 'Ground-up rebuild of your site’s frontend using modern React and Tailwind CSS, delivering sleek animations, mobile ergonomics, and fast performance.',
+        description: 'Ground-up rebuild of your site’s frontend using modern Next.js / React and Tailwind CSS, delivering sleek animations, mobile ergonomics, and fast performance.',
         pagesOrModules: 'Up to 6 Comprehensive Pages',
         timeline: '7 – 11 Business Days',
         revisions: '4 Rounds',
@@ -776,7 +776,7 @@ export const SERVICES = [
       'Store Owners Needing Payment Gateway Integration',
       'Websites Needing Automated WhatsApp or SMS Alerts',
       'Businesses Connecting External CRMs (HubSpot, Zoho, Exotel)',
-      'Platforms Needing Cloud Storage (AWS S3) or Email (Nodemailer)',
+      'Platforms Needing Cloud Storage or Email (Nodemailer)',
       'Companies Seeking Secure Webhook Listeners',
     ],
     homeDeliverables: [
@@ -829,7 +829,7 @@ export const SERVICES = [
           'Integration of up to 3 external APIs / services',
           'Payment Gateway + Cryptographic Webhook verification (HMAC-SHA256)',
           'Automated WhatsApp or SMS alert notification trigger upon order/lead',
-          'AWS S3 bucket integration for image & document uploads',
+          'Cloud storage integration for image & document uploads',
           'Database record synchronization on successful events',
           'Comprehensive retry and error logging logic',
           '14-day post-launch warranty',
@@ -879,7 +879,7 @@ export const SERVICES = [
       { name: 'HMAC Webhook Signature Verification', starter: false, business: true, premium: true },
       { name: 'Database Event Synchronization', starter: false, business: true, premium: true },
       { name: 'WhatsApp / SMS Dispatch Hooks', starter: 'Optional', business: true, premium: true },
-      { name: 'Cloud File Upload (AWS S3)', starter: 'Optional', business: true, premium: true },
+      { name: 'Cloud File Upload & Storage', starter: 'Optional', business: true, premium: true },
       { name: 'Background Polling / Sync Jobs', starter: false, business: false, premium: true },
       { name: 'Rate Limiting & Queue Handling', starter: false, business: false, premium: true },
       { name: 'Post-Launch Technical Support', starter: '7 Days', business: '14 Days', premium: '30 Days' },

@@ -65,12 +65,12 @@ export const TECH_STACK = [
     ),
   },
   {
-    name: 'TypeScript',
-    color: '#60a5fa',
+    name: 'Next.js',
+    color: '#ffffff',
     renderIcon: () => (
-      <svg width="18" height="18" viewBox="0 0 24 24">
-        <rect width="22" height="22" x="1" y="1" rx="4" fill="#3b82f6" fillOpacity="0.2" stroke="#60a5fa" strokeWidth="1.6" />
-        <text x="12" y="15.5" fill="#93c5fd" fontSize="10.5" fontWeight="900" textAnchor="middle" fontFamily="monospace">TS</text>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="#ffffff" strokeWidth="1.8" />
+        <path d="M9 16.5V7.5L16.5 16.5V7.5" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -111,16 +111,6 @@ export const TECH_STACK = [
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.8">
         <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2" />
         <line x1="12" y1="22" x2="12" y2="12" />
-      </svg>
-    ),
-  },
-  {
-    name: 'AWS S3',
-    color: '#f97316',
-    renderIcon: () => (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" strokeWidth="1.8">
-        <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z" />
-        <path d="M3 7l9 4 9-4" />
       </svg>
     ),
   },

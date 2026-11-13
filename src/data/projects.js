@@ -22,7 +22,7 @@ export const PROJECTS = [
       metric: 'POS & Order Dispatch',
       perf: 'Concurrent Inventory Guard',
     },
-    deployment: 'Cloud Backend Infrastructure & AWS S3 Object Storage',
+    deployment: 'Cloud Backend Infrastructure & Object Storage',
     architecture: {
       type: 'Multi-Store POS & Backend Services',
       summary: 'Express 5 backend handling online orders, offline retail POS checkout, WebSockets delivery dispatch, and background cron jobs.',
@@ -100,7 +100,7 @@ export const PROJECTS = [
       'Socket.IO',
       'Cashfree Gateway',
       'Firebase Admin SDK',
-      'AWS S3',
+      'Cloud Storage',
       'Node-Cron',
       'JWT',
     ],
@@ -109,7 +109,7 @@ export const PROJECTS = [
       'Database & Cache': ['MongoDB', 'Mongoose', 'Redis', 'ioredis'],
       'Real-Time & Push': ['Socket.IO', 'WebSockets', 'Firebase Admin SDK'],
       'Payments & Billing': ['Cashfree Payment Gateway', 'QRCode Generator'],
-      'Cloud & Storage': ['AWS S3', 'Multer S3'],
+      'Cloud & Storage': ['Cloud Object Storage', 'Multer'],
       'Security & Workers': ['JWT', 'bcryptjs', 'Crypto', 'Node-Cron'],
     },
     url: 'https://fulupo.ai',
@@ -207,7 +207,7 @@ export const PROJECTS = [
       'Mongoose',
       'Cashfree',
       'Exotel Telephony',
-      'AWS S3',
+      'Cloud Storage',
       'FFmpeg',
       'Node-Cron',
     ],
@@ -217,7 +217,7 @@ export const PROJECTS = [
       'Database': ['MongoDB', 'Mongoose ODM'],
       'Telephony & Audio': ['Exotel Cloud Telephony', 'FFmpeg', 'React H5 Audio Player'],
       'Payments & Billing': ['Cashfree Gateway', 'PDFKit Invoicing', 'GST Calculations'],
-      'Automation & Cloud': ['Node-Cron', 'AWS S3', 'ExcelJS', 'Nodemailer'],
+      'Automation & Cloud': ['Node-Cron', 'Cloud Storage', 'ExcelJS', 'Nodemailer'],
     },
     url: 'https://infysec.org',
     github: 'https://github.com/doubletapinnovations/infysec-backend',
@@ -721,7 +721,7 @@ export const IDENTITY_ROLES = [
 
 // Technology Network & Dataflow Pipeline
 export const TECH_DATAFLOW = [
-  { step: 1, node: 'Customer Storefront / CRM UI', role: 'React 19 · Tailwind CSS · Redux Toolkit', tag: 'UI LAYER', color: '#00f3ff' },
+  { step: 1, node: 'Customer Storefront / CRM UI', role: 'Next.js · React 19 · Tailwind CSS', tag: 'UI LAYER', color: '#00f3ff' },
   { step: 2, node: 'API Gateway & Authentication', role: 'Express 5 · JWT · REST Endpoints', tag: 'REST API', color: '#ec4899' },
   { step: 3, node: 'Business Logic & Services', role: 'Inventory Guard · HMAC Webhooks', tag: 'SERVICES', color: '#3b82f6' },
   { step: 4, node: 'Telephony & Live Dispatch', role: 'Exotel Telephony · Cashfree · Socket.IO', tag: 'REAL-TIME', color: '#facc15' },
@@ -741,6 +741,7 @@ export const SKILLS = {
     'JWT & bcrypt Authentication',
   ],
   'Frontend & UI': [
+    'Next.js',
     'React 19 / React.js',
     'Redux Toolkit',
     'JavaScript (ES6+)',
@@ -755,7 +756,7 @@ export const SKILLS = {
     'Mongoose ODM',
     'Schema Design',
     'Aggregation Pipelines',
-    'AWS S3 & Multer S3',
+    'Cloud Object Storage & Multer',
     'Store-Level Access Control',
   ],
   'Integrations & Services': [
@@ -772,6 +773,6 @@ export const SKILLS = {
     'Git & GitHub Version Control',
     'Postman API Testing',
     'DevOps Collaboration (Docker / CI-CD Delivery)',
-    'Vite & Build Tools',
+    'Vercel, Vite & Build Tools',
   ],
 };
