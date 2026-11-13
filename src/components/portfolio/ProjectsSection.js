@@ -369,32 +369,38 @@ function ProjectCard({ project, onClick }) {
             {project.domain}
           </div>
 
-          <h3 style={{
-            fontSize: '1.05rem',
-            fontWeight: 700,
-            color: '#ffffff',
-            marginBottom: '0.45rem',
-            lineHeight: 1.35,
-            minHeight: '2.8rem',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}>
+          <h3
+            className="project-card-title"
+            style={{
+              fontSize: '1.05rem',
+              fontWeight: 700,
+              color: '#ffffff',
+              marginBottom: '0.45rem',
+              lineHeight: 1.35,
+              minHeight: '2.8rem',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {project.title}
           </h3>
 
-          <p style={{
-            fontSize: '0.82rem',
-            color: '#cbd5e1',
-            lineHeight: 1.5,
-            marginBottom: '0.85rem',
-            minHeight: '2.5rem',
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}>
+          <p
+            className="project-card-desc"
+            style={{
+              fontSize: '0.82rem',
+              color: '#cbd5e1',
+              lineHeight: 1.5,
+              marginBottom: '0.85rem',
+              minHeight: '2.5rem',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {project.description}
           </p>
         </div>
@@ -613,13 +619,16 @@ export default function ProjectsSection({ onSelectProject }) {
           <span className="desktop-heading-text">Featured Projects & Case Studies</span>
           <span className="mobile-heading-text">Featured Projects</span>
         </h2>
-        <p style={{
-          fontSize: '1.05rem',
-          color: '#94a3b8',
-          maxWidth: 680,
-          lineHeight: 1.7,
-          marginBottom: '2rem',
-        }}>
+        <p
+          className="section-lead-desc"
+          style={{
+            fontSize: '1.05rem',
+            color: '#94a3b8',
+            maxWidth: 680,
+            lineHeight: 1.7,
+            marginBottom: '2rem',
+          }}
+        >
           Explore detailed case studies across production web platforms (Quick-Commerce POS, Enterprise CRM with Cloud Telephony) and 5 freelance e-commerce systems built with a practical dual-application setup. Click any card to inspect full system breakdowns.
         </p>
 

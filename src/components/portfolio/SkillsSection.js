@@ -62,13 +62,16 @@ export default function SkillsSection() {
           <span className="desktop-heading-text">Technical Skills & Tools</span>
           <span className="mobile-heading-text">Skills & Tools</span>
         </h2>
-        <p style={{
-          fontSize: '1.05rem',
-          color: '#94a3b8',
-          maxWidth: 580,
-          lineHeight: 1.7,
-          marginBottom: '2.5rem',
-        }}>
+        <p
+          className="section-lead-desc"
+          style={{
+            fontSize: '1.05rem',
+            color: '#94a3b8',
+            maxWidth: 580,
+            lineHeight: 1.7,
+            marginBottom: '2.5rem',
+          }}
+        >
           Core technologies applied to build web applications. From interactive frontend state to REST APIs and database queries.
         </p>
       </motion.div>
@@ -107,18 +110,21 @@ export default function SkillsSection() {
                 e.currentTarget.style.boxShadow = `0 10px 30px rgba(0,0,0,0.6), inset 0 0 15px ${color}10`;
               }}
             >
-              <div style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                letterSpacing: '0.12em',
-                color: color,
-                marginBottom: '1rem',
-                textTransform: 'uppercase',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-              }}>
+              <div
+                className="skill-group-title"
+                style={{
+                  fontFamily: 'JetBrains Mono, monospace',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.12em',
+                  color: color,
+                  marginBottom: '1rem',
+                  textTransform: 'uppercase',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.6rem',
+                }}
+              >
                 <span style={{
                   width: 8,
                   height: 8,
@@ -129,15 +135,19 @@ export default function SkillsSection() {
                 {category}
               </div>
               {items.map((skill, i) => (
-                <div key={skill} style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.65rem',
-                  padding: '0.24rem 0',
-                  borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.03)' : 'none',
-                  fontSize: '0.85rem',
-                  color: '#cbd5e1',
-                }}>
+                <div
+                  key={skill}
+                  className="skill-pill-name"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.65rem',
+                    padding: '0.24rem 0',
+                    borderBottom: i < items.length - 1 ? '1px solid rgba(255,255,255,0.03)' : 'none',
+                    fontSize: '0.85rem',
+                    color: '#cbd5e1',
+                  }}
+                >
                   <span style={{
                     width: 4,
                     height: 4,

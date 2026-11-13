@@ -64,7 +64,7 @@ export default function AboutSection() {
             <span className="mobile-heading-text">Full-Stack Development</span>
           </h2>
 
-          <div style={{ color: '#cbd5e1', lineHeight: 1.75, fontSize: '0.94rem' }}>
+          <div className="about-section-desc" style={{ color: '#cbd5e1', lineHeight: 1.75, fontSize: '0.94rem' }}>
             <p style={{ marginBottom: '1rem' }}>
               I am <strong style={{ color: '#ffffff', textShadow: '0 0 10px #00f3ff' }}>Kishore</strong>, a junior full-stack developer dedicated to building practical, reliable web applications — with hands-on experience developing quick-commerce grocery backends with POS checkout (<span style={{ color: '#00f3ff', fontWeight: 600 }}>Fulupo</span>), enterprise CRM platforms with cloud telephony (<span style={{ color: '#a855f7', fontWeight: 600 }}>Infysec</span>), and freelance e-commerce systems.
             </p>
@@ -129,6 +129,7 @@ export default function AboutSection() {
             {TECH_DATAFLOW.map((flow) => (
               <div
                 key={flow.step}
+                className="dataflow-pipeline-item"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -163,31 +164,39 @@ export default function AboutSection() {
 
                 {/* Node info with stacked primary name + tech subtitle for larger, substantive card height */}
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{
-                    fontSize: '0.92rem',
-                    fontWeight: 600,
-                    color: '#ffffff',
-                    marginBottom: '0.2rem',
-                    letterSpacing: '0.01em',
-                  }}>
+                  <div
+                    className="dataflow-pipeline-title"
+                    style={{
+                      fontSize: '0.92rem',
+                      fontWeight: 600,
+                      color: '#ffffff',
+                      marginBottom: '0.2rem',
+                      letterSpacing: '0.01em',
+                    }}
+                  >
                     {flow.node}
                   </div>
-                  <div style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '0.73rem',
-                    color: flow.color,
-                    letterSpacing: '0.02em',
-                  }}>
+                  <div
+                    className="dataflow-pipeline-subtitle"
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: '0.73rem',
+                      color: flow.color,
+                      letterSpacing: '0.02em',
+                    }}
+                  >
                     {flow.role}
                   </div>
                 </div>
 
                 {/* Status/Tag Pill */}
                 {flow.tag && (
-                  <div style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '0.65rem',
-                    fontWeight: 700,
+                  <div
+                    className="dataflow-pipeline-tag"
+                    style={{
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: '0.65rem',
+                      fontWeight: 700,
                     color: flow.color,
                     padding: '0.22rem 0.55rem',
                     borderRadius: '0.3rem',

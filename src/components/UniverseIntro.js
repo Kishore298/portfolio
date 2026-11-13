@@ -389,7 +389,7 @@ export function UnifiedIntroScreen({ onExplore, onContact, onSkip }) {
           transition={{ duration: 0.6, delay: 0.45 }}
           style={{
             fontFamily: 'Inter, sans-serif',
-            fontSize: 'clamp(1.05rem, 2.1vw, 1.35rem)',
+            fontSize: 'clamp(0.85rem, 1.8vw, 1.25rem)',
             fontWeight: 500,
             color: '#fbcfe8',
             fontStyle: 'italic',

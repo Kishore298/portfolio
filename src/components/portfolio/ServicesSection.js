@@ -61,6 +61,7 @@ export default function ServicesSection() {
         </h2>
 
         <p
+          className="section-lead-desc"
           style={{
             fontSize: '1.05rem',
             color: '#94a3b8',
@@ -211,6 +212,7 @@ export default function ServicesSection() {
 
                 {/* Service Title */}
                 <h3
+                  className="service-card-title"
                   style={{
                     fontSize: '1.2rem',
                     fontWeight: 700,
@@ -225,6 +227,7 @@ export default function ServicesSection() {
 
                 {/* Short Customer Description */}
                 <p
+                  className="service-card-desc"
                   style={{
                     fontSize: '0.85rem',
                     color: '#cbd5e1',
@@ -254,6 +257,7 @@ export default function ServicesSection() {
                     {service.homeDeliverables.map((item, i) => (
                       <li
                         key={i}
+                        className="service-deliverable-item"
                         style={{
                           fontSize: '0.76rem',
                           color: '#e2e8f0',

@@ -72,13 +72,16 @@ export default function ContactSection() {
           <span className="desktop-heading-text">Have an idea worth building?</span>
           <span className="mobile-heading-text">Let's Connect</span>
         </h2>
-        <p style={{
-          fontSize: '1.15rem',
-          color: '#ec4899',
-          fontStyle: 'italic',
-          letterSpacing: '0.04em',
-          fontWeight: 500,
-        }}>
+        <p
+          className="contact-lead-desc"
+          style={{
+            fontSize: '1.15rem',
+            color: '#ec4899',
+            fontStyle: 'italic',
+            letterSpacing: '0.04em',
+            fontWeight: 500,
+          }}
+        >
           "Let's build something useful."
         </p>
       </motion.div>
@@ -146,12 +149,15 @@ export default function ContactSection() {
           }}>
             Start a Conversation
           </h3>
-          <p style={{
-            color: '#cbd5e1',
-            marginBottom: '2rem',
-            fontSize: '0.95rem',
-            lineHeight: 1.6,
-          }}>
+          <p
+            className="contact-sub-desc"
+            style={{
+              color: '#cbd5e1',
+              marginBottom: '2rem',
+              fontSize: '0.95rem',
+              lineHeight: 1.6,
+            }}
+          >
             Whether you have a junior developer opportunity, a project to build, or a question, my inbox is open.
           </p>
 
@@ -205,7 +211,10 @@ export default function ContactSection() {
                   }}>
                     {contact.label}
                   </div>
-                  <div style={{ fontSize: '0.92rem', color: '#ffffff', fontWeight: 500 }}>
+                  <div
+                    className="contact-channel-val"
+                    style={{ fontSize: '0.92rem', color: '#ffffff', fontWeight: 500 }}
+                  >
                     {contact.value}
                   </div>
                 </div>

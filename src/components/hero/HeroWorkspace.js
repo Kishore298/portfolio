@@ -1,13 +1,12 @@
 // src/components/hero/HeroWorkspace.js
 // Futuristic Living Browser Developer Workspace Hero: Fixed Bash Terminal + 3D Layered Code Editor Stack
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import FixedBashTerminal from './FixedBashTerminal';
 import EditorStack from './EditorStack';
 
 export default function HeroWorkspace({ onContact, onSelectProject }) {
   const container3DRef = useRef();
-  const [mobileWorkspaceTab, setMobileWorkspaceTab] = useState('term'); // 'term', 'editor', or 'both'
 
   // High-performance direct DOM pointer parallax — ZERO React state re-renders
   useEffect(() => {
@@ -191,6 +190,7 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.25 }}
+          className="hero-subtext-desc"
           style={{
             fontSize: 'clamp(0.92rem, 1.6vw, 1.1rem)',
             color: '#cbd5e1',
@@ -233,42 +233,17 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
 
       {/* 2. The Living Browser Hero Workspace: Fixed Terminal (Left) + 3D Editor Stack (Right/Center) */}
       <div className="hero-workspace-outer">
-        {/* Mobile View Switcher (Only visible on screens <= 860px to display full dedicated cards) */}
-        <div className="hero-mobile-tabs-pill-box">
-          <button
-            type="button"
-            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'term' ? 'active' : ''}`}
-            onClick={() => setMobileWorkspaceTab('term')}
-          >
-            💻 Bash Terminal
-          </button>
-          <button
-            type="button"
-            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'editor' ? 'active' : ''}`}
-            onClick={() => setMobileWorkspaceTab('editor')}
-          >
-            ⚡ Code Editor
-          </button>
-          <button
-            type="button"
-            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'both' ? 'active' : ''}`}
-            onClick={() => setMobileWorkspaceTab('both')}
-          >
-            Both Cards
-          </button>
-        </div>
-
         <div
           ref={container3DRef}
           className="hero-workspace-3d-grid"
         >
           {/* Left Column: Fixed Cyber Bash Terminal (Independent continuous telemetry loop) */}
-          <div className={`hero-workspace-col-term ${mobileWorkspaceTab === 'editor' ? 'hide-on-mobile' : ''}`}>
+          <div className="hero-workspace-col-term">
             <FixedBashTerminal />
           </div>
 
           {/* Right/Center Column: 3D Layered Code Editor Stack (5-file swipe deck) */}
-          <div className={`hero-workspace-col-editor ${mobileWorkspaceTab === 'term' ? 'hide-on-mobile' : ''}`}>
+          <div className="hero-workspace-col-editor">
             <EditorStack />
           </div>
         </div>
@@ -284,41 +259,6 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
           z-index: 4;
           box-sizing: border-box;
           overflow: visible;
-        }
-
-        .hero-mobile-tabs-pill-box {
-          display: none;
-          align-items: center;
-          justify-content: center;
-          gap: 0.45rem;
-          margin: 0 auto 1.5rem;
-          padding: 0.25rem;
-          background: rgba(10, 4, 28, 0.7);
-          border: 1px solid rgba(0, 243, 255, 0.2);
-          border-radius: 9999px;
-          backdrop-filter: blur(12px);
-          max-width: fit-content;
-        }
-
-        .hero-mobile-tab-btn {
-          background: transparent;
-          border: 1px solid transparent;
-          color: #94a3b8;
-          font-family: 'JetBrains Mono', monospace;
-          font-size: 0.72rem;
-          font-weight: 600;
-          padding: 0.35rem 0.85rem;
-          border-radius: 9999px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          white-space: nowrap;
-        }
-
-        .hero-mobile-tab-btn.active {
-          background: rgba(0, 243, 255, 0.15);
-          border-color: rgba(0, 243, 255, 0.5);
-          color: #ffffff;
-          box-shadow: 0 0 14px rgba(0, 243, 255, 0.35);
         }
 
         .hero-workspace-3d-grid {
@@ -359,9 +299,6 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
             perspective: none !important;
             padding: 0 1rem !important;
           }
-          .hero-mobile-tabs-pill-box {
-            display: flex;
-          }
           .hero-workspace-3d-grid {
             transform: none !important;
             transform-style: flat !important;
@@ -376,10 +313,6 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
             max-width: 440px !important;
             transform: none !important;
             margin: 0 auto !important;
-          }
-          .hero-workspace-col-term.hide-on-mobile,
-          .hero-workspace-col-editor.hide-on-mobile {
-            display: none !important;
           }
         }
       `}</style>
