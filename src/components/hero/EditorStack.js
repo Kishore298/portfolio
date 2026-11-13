@@ -336,14 +336,13 @@ export default function EditorStack() {
 
   return (
     <div
+      className="editor-stack-outer"
       style={{
         position: 'relative',
         width: '100%',
-        maxWidth: '680px',
         minWidth: 0,
-        height: '380px',
         perspective: '1200px',
-        overflow: 'hidden',
+        overflow: 'visible',
         boxSizing: 'border-box',
       }}
     >
@@ -354,13 +353,13 @@ export default function EditorStack() {
         const isForeground = relIdx === 0;
 
         // Visual transforms for genuine stacking depth (compact on mobile to avoid overflow)
-        const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 640;
-        let xOffset = isMobileScreen ? relIdx * 2 : relIdx * 12;
-        let yOffset = isMobileScreen ? -relIdx * 6 : -relIdx * 12;
-        let scale = 1 - relIdx * 0.04;
-        let opacity = isForeground ? 1 : Math.max(0.18, 0.85 - relIdx * 0.2);
+        const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 860;
+        let xOffset = isMobileScreen ? relIdx * 2 : relIdx * 4;
+        let yOffset = isMobileScreen ? -relIdx * 3 : -relIdx * 5;
+        let scale = 1 - relIdx * 0.035;
+        let opacity = isForeground ? 1 : Math.max(0.2, 0.85 - relIdx * 0.18);
         let zIndex = 10 - relIdx * 2;
-        let rotateY = isMobileScreen ? 0 : -relIdx * 2;
+        let rotateY = isMobileScreen ? 0 : -relIdx * 1.5;
         const swipeDistance = isMobileScreen ? 90 : 260;
 
         return (
@@ -384,14 +383,17 @@ export default function EditorStack() {
             }}
             style={{
               position: 'absolute',
-              inset: 0,
+              top: isMobileScreen ? 14 : 22,
+              left: 0,
+              right: isMobileScreen ? 8 : 18,
+              bottom: 0,
               zIndex,
               borderRadius: '0.85rem',
               background: 'rgba(9, 4, 26, 0.96)',
               border: `1px solid ${isForeground ? file.accent : 'rgba(255, 255, 255, 0.12)'}`,
               boxShadow: isForeground
-                ? `0 0 35px ${file.accent}33, 0 25px 50px rgba(0, 0, 0, 0.85)`
-                : '0 15px 30px rgba(0, 0, 0, 0.65)',
+                ? `0 0 32px ${file.accent}33, 0 20px 45px rgba(0, 0, 0, 0.85)`
+                : '0 12px 25px rgba(0, 0, 0, 0.65)',
               overflow: 'hidden',
               cursor: isForeground ? 'default' : 'pointer',
               display: 'flex',
@@ -603,6 +605,16 @@ export default function EditorStack() {
       })}
 
       <style>{`
+        .editor-stack-outer {
+          max-width: 440px;
+          height: clamp(310px, 45vh, 370px);
+        }
+        @media (min-width: 861px) {
+          .editor-stack-outer {
+            max-width: 680px;
+            height: 380px;
+          }
+        }
         @keyframes editorCursorBlink {
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0; }

@@ -1,12 +1,13 @@
 // src/components/hero/HeroWorkspace.js
 // Futuristic Living Browser Developer Workspace Hero: Fixed Bash Terminal + 3D Layered Code Editor Stack
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import FixedBashTerminal from './FixedBashTerminal';
 import EditorStack from './EditorStack';
 
 export default function HeroWorkspace({ onContact, onSelectProject }) {
   const container3DRef = useRef();
+  const [mobileWorkspaceTab, setMobileWorkspaceTab] = useState('term'); // 'term', 'editor', or 'both'
 
   // High-performance direct DOM pointer parallax — ZERO React state re-renders
   useEffect(() => {
@@ -231,64 +232,157 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
       </div>
 
       {/* 2. The Living Browser Hero Workspace: Fixed Terminal (Left) + 3D Editor Stack (Right/Center) */}
-      <div
-        style={{
-          perspective: '1300px',
-          width: '100%',
-          maxWidth: '1240px',
-          padding: '0 clamp(0.75rem, 3vw, 1.5rem)',
-          position: 'relative',
-          zIndex: 4,
-          boxSizing: 'border-box',
-          overflow: 'hidden',
-        }}
-      >
+      <div className="hero-workspace-outer">
+        {/* Mobile View Switcher (Only visible on screens <= 860px to display full dedicated cards) */}
+        <div className="hero-mobile-tabs-pill-box">
+          <button
+            type="button"
+            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'term' ? 'active' : ''}`}
+            onClick={() => setMobileWorkspaceTab('term')}
+          >
+            💻 Bash Terminal
+          </button>
+          <button
+            type="button"
+            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'editor' ? 'active' : ''}`}
+            onClick={() => setMobileWorkspaceTab('editor')}
+          >
+            ⚡ Code Editor
+          </button>
+          <button
+            type="button"
+            className={`hero-mobile-tab-btn ${mobileWorkspaceTab === 'both' ? 'active' : ''}`}
+            onClick={() => setMobileWorkspaceTab('both')}
+          >
+            Both Cards
+          </button>
+        </div>
+
         <div
           ref={container3DRef}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 'clamp(1rem, 3vw, 2rem)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            maxWidth: '100%',
-            transition: 'transform 0.05s linear',
-            transformStyle: 'preserve-3d',
-            boxSizing: 'border-box',
-          }}
+          className="hero-workspace-3d-grid"
         >
           {/* Left Column: Fixed Cyber Bash Terminal (Independent continuous telemetry loop) */}
-          <div
-            style={{
-              flex: '1 1 290px',
-              maxWidth: '380px',
-              width: '100%',
-              minWidth: 0,
-              display: 'flex',
-              justifyContent: 'center',
-              transform: 'translateZ(10px)',
-              boxSizing: 'border-box',
-            }}
-          >
+          <div className={`hero-workspace-col-term ${mobileWorkspaceTab === 'editor' ? 'hide-on-mobile' : ''}`}>
             <FixedBashTerminal />
           </div>
 
-          {/* Right/Center Column: 3D Layered Code Editor Stack (40-50% width, 5-file swipe deck) */}
-          <div
-            style={{
-              flex: '1 1 310px',
-              maxWidth: '680px',
-              width: '100%',
-              minWidth: 0,
-              transform: 'translateZ(30px)',
-              boxSizing: 'border-box',
-            }}
-          >
+          {/* Right/Center Column: 3D Layered Code Editor Stack (5-file swipe deck) */}
+          <div className={`hero-workspace-col-editor ${mobileWorkspaceTab === 'term' ? 'hide-on-mobile' : ''}`}>
             <EditorStack />
           </div>
         </div>
       </div>
+
+      <style>{`
+        .hero-workspace-outer {
+          perspective: 1300px;
+          width: 100%;
+          max-width: 1240px;
+          padding: 0 clamp(1rem, 3.5vw, 1.75rem);
+          position: relative;
+          z-index: 4;
+          box-sizing: border-box;
+          overflow: visible;
+        }
+
+        .hero-mobile-tabs-pill-box {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          gap: 0.45rem;
+          margin: 0 auto 1.5rem;
+          padding: 0.25rem;
+          background: rgba(10, 4, 28, 0.7);
+          border: 1px solid rgba(0, 243, 255, 0.2);
+          border-radius: 9999px;
+          backdrop-filter: blur(12px);
+          max-width: fit-content;
+        }
+
+        .hero-mobile-tab-btn {
+          background: transparent;
+          border: 1px solid transparent;
+          color: #94a3b8;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.72rem;
+          font-weight: 600;
+          padding: 0.35rem 0.85rem;
+          border-radius: 9999px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+        }
+
+        .hero-mobile-tab-btn.active {
+          background: rgba(0, 243, 255, 0.15);
+          border-color: rgba(0, 243, 255, 0.5);
+          color: #ffffff;
+          box-shadow: 0 0 14px rgba(0, 243, 255, 0.35);
+        }
+
+        .hero-workspace-3d-grid {
+          display: flex;
+          flex-wrap: wrap;
+          gap: clamp(1.25rem, 3vw, 2rem);
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          max-width: 100%;
+          transition: transform 0.05s linear;
+          transform-style: preserve-3d;
+          box-sizing: border-box;
+        }
+
+        .hero-workspace-col-term {
+          flex: 1 1 290px;
+          max-width: 380px;
+          width: 100%;
+          min-width: 0;
+          display: flex;
+          justify-content: center;
+          transform: translateZ(10px);
+          box-sizing: border-box;
+        }
+
+        .hero-workspace-col-editor {
+          flex: 1 1 310px;
+          max-width: 680px;
+          width: 100%;
+          min-width: 0;
+          transform: translateZ(30px);
+          box-sizing: border-box;
+        }
+
+        @media (max-width: 860px) {
+          .hero-workspace-outer {
+            perspective: none !important;
+            padding: 0 1rem !important;
+          }
+          .hero-mobile-tabs-pill-box {
+            display: flex;
+          }
+          .hero-workspace-3d-grid {
+            transform: none !important;
+            transform-style: flat !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 1.5rem !important;
+          }
+          .hero-workspace-col-term,
+          .hero-workspace-col-editor {
+            flex: none !important;
+            width: 100% !important;
+            max-width: 440px !important;
+            transform: none !important;
+            margin: 0 auto !important;
+          }
+          .hero-workspace-col-term.hide-on-mobile,
+          .hero-workspace-col-editor.hide-on-mobile {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

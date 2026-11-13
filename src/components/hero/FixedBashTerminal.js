@@ -58,20 +58,19 @@ export default function FixedBashTerminal() {
 
   return (
     <div
+      className="fixed-bash-terminal-outer"
       style={{
         background: 'rgba(9, 4, 24, 0.95)',
         border: '1px solid rgba(0, 243, 255, 0.35)',
         borderRadius: '0.85rem',
         overflow: 'hidden',
         fontFamily: 'JetBrains Mono, monospace',
-        fontSize: '0.72rem',
+        fontSize: 'clamp(0.66rem, 1.8vw, 0.72rem)',
         boxShadow: '0 0 25px rgba(0, 243, 255, 0.15), 0 20px 40px rgba(0, 0, 0, 0.8)',
         backdropFilter: 'blur(14px)',
         width: '100%',
-        maxWidth: '360px',
         minWidth: 0,
         boxSizing: 'border-box',
-        height: '380px',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -172,6 +171,16 @@ export default function FixedBashTerminal() {
       </div>
 
       <style>{`
+        .fixed-bash-terminal-outer {
+          max-width: 440px;
+          height: clamp(310px, 45vh, 370px);
+        }
+        @media (min-width: 861px) {
+          .fixed-bash-terminal-outer {
+            max-width: 360px;
+            height: 380px;
+          }
+        }
         @keyframes terminalCursorBlink {
           0%, 49% { opacity: 1; }
           50%, 100% { opacity: 0; }
