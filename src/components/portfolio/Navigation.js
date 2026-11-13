@@ -1,9 +1,11 @@
 // src/components/portfolio/Navigation.js
-// Cyberpunk Glassmorphic Navigation with Mobile Hamburger Menu (<= 768px) & Zero-Hash URLs
+// Cyberpunk Glassmorphic Navigation with Mobile Hamburger Menu (<= 768px), Zero-Hash URLs & Services Routing
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigation } from '../../context/NavigationContext';
 
 const NAV_LINKS = [
+  { targetId: 'services', label: '// SERVICES', path: '/services' },
   { targetId: 'projects', label: '// PROJECTS' },
   { targetId: 'about', label: '// ABOUT' },
   { targetId: 'skills', label: '// SKILLS' },
@@ -13,6 +15,7 @@ const NAV_LINKS = [
 export default function Navigation({ visible = true, onContactClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { currentPath, navigate, openEnquiry } = useNavigation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -44,40 +47,62 @@ export default function Navigation({ visible = true, onContactClick }) {
 
   if (!visible) return null;
 
-  const scrollToSection = (e, sectionId) => {
+  const handleNavClick = (e, link) => {
     if (e) e.preventDefault();
     setMobileMenuOpen(false);
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+
+    const isHome = currentPath === '/';
+
+    if (link.targetId === 'services') {
+      if (isHome) {
+        const el = document.getElementById('services');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          navigate('/services');
+        }
+      } else {
+        navigate('/services');
+      }
+      return;
     }
-    // Keep URL clean as http://localhost:3000 without #hash
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
+
+    // Other section links (projects, about, skills, contact)
+    if (isHome) {
+      const el = document.getElementById(link.targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Cross-page navigation back to homepage section
+      navigate('/#' + link.targetId);
     }
   };
 
-  const scrollToTop = (e) => {
+  const handleLogoClick = (e) => {
     if (e) e.preventDefault();
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
+    if (currentPath === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
     }
   };
 
   const handleHireMe = (e) => {
     if (e) e.preventDefault();
     setMobileMenuOpen(false);
-    if (onContactClick) {
+    // Direct trigger to the cyberpunk freelance enquiry modal
+    if (openEnquiry) {
+      openEnquiry('business-websites', 'business');
+    } else if (onContactClick) {
       onContactClick();
     } else {
-      scrollToSection(null, 'contact');
-    }
-    if (window.location.hash) {
-      window.history.replaceState(null, '', window.location.pathname);
+      handleNavClick(null, { targetId: 'contact' });
     }
   };
+
+  const isServicesActive = currentPath === '/services' || currentPath.startsWith('/services/');
 
   return (
     <>
@@ -105,7 +130,7 @@ export default function Navigation({ visible = true, onContactClick }) {
       >
         {/* Brand Logo (Scrolls to top, keeps clean URL) */}
         <button
-          onClick={scrollToTop}
+          onClick={handleLogoClick}
           style={{
             background: 'none',
             border: 'none',
@@ -137,35 +162,43 @@ export default function Navigation({ visible = true, onContactClick }) {
             alignItems: 'center',
           }}
         >
-          {NAV_LINKS.map((link) => (
-            <li key={link.targetId}>
-              <button
-                onClick={(e) => scrollToSection(e, link.targetId)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: '0.35rem 0.2rem',
-                  cursor: 'pointer',
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  color: '#cbd5e1',
-                  letterSpacing: '0.08em',
-                  transition: 'all 0.25s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.color = '#00f3ff';
-                  e.target.style.textShadow = '0 0 10px rgba(0, 243, 255, 0.8)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.color = '#cbd5e1';
-                  e.target.style.textShadow = 'none';
-                }}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isThisLinkActive = link.targetId === 'services' && isServicesActive;
+
+            return (
+              <li key={link.targetId}>
+                <button
+                  onClick={(e) => handleNavClick(e, link)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: '0.35rem 0.2rem',
+                    cursor: 'pointer',
+                    fontFamily: 'JetBrains Mono, monospace',
+                    fontSize: '0.75rem',
+                    fontWeight: isThisLinkActive ? 700 : 600,
+                    color: isThisLinkActive ? '#00f3ff' : '#cbd5e1',
+                    letterSpacing: '0.08em',
+                    transition: 'all 0.25s ease',
+                    textShadow: isThisLinkActive ? '0 0 10px rgba(0, 243, 255, 0.8)' : 'none',
+                    borderBottom: isThisLinkActive ? '2px solid #00f3ff' : '2px solid transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = '#00f3ff';
+                    e.currentTarget.style.textShadow = '0 0 10px rgba(0, 243, 255, 0.8)';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isThisLinkActive) {
+                      e.currentTarget.style.color = '#cbd5e1';
+                      e.currentTarget.style.textShadow = 'none';
+                    }
+                  }}
+                >
+                  {link.label}
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Desktop CTA Button (> 768px) */}
@@ -291,45 +324,52 @@ export default function Navigation({ visible = true, onContactClick }) {
             }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55rem' }}>
-              {NAV_LINKS.map((link, idx) => (
-                <motion.button
-                  key={link.targetId}
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.05, duration: 0.2 }}
-                  onClick={(e) => scrollToSection(e, link.targetId)}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(0, 243, 255, 0.18)',
-                    borderRadius: '0.5rem',
-                    padding: '0.85rem 1.25rem',
-                    textAlign: 'left',
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '0.85rem',
-                    fontWeight: 700,
-                    color: '#f8fafc',
-                    letterSpacing: '0.1em',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    transition: 'all 0.2s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = '#00f3ff';
-                    e.currentTarget.style.background = 'rgba(0, 243, 255, 0.12)';
-                    e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 243, 255, 0.25)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'rgba(0, 243, 255, 0.18)';
-                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <span>{link.label}</span>
-                  <span style={{ color: '#00f3ff', fontSize: '0.85rem' }}>→</span>
-                </motion.button>
-              ))}
+              {NAV_LINKS.map((link, idx) => {
+                const isThisLinkActive = link.targetId === 'services' && isServicesActive;
+
+                return (
+                  <motion.button
+                    key={link.targetId}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05, duration: 0.2 }}
+                    onClick={(e) => handleNavClick(e, link)}
+                    style={{
+                      background: isThisLinkActive ? 'rgba(0, 243, 255, 0.12)' : 'rgba(255, 255, 255, 0.03)',
+                      border: `1px solid ${isThisLinkActive ? '#00f3ff' : 'rgba(0, 243, 255, 0.18)'}`,
+                      borderRadius: '0.5rem',
+                      padding: '0.85rem 1.25rem',
+                      textAlign: 'left',
+                      fontFamily: 'JetBrains Mono, monospace',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      color: isThisLinkActive ? '#00f3ff' : '#f8fafc',
+                      letterSpacing: '0.1em',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      transition: 'all 0.2s ease',
+                      boxShadow: isThisLinkActive ? '0 0 15px rgba(0, 243, 255, 0.25)' : 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = '#00f3ff';
+                      e.currentTarget.style.background = 'rgba(0, 243, 255, 0.12)';
+                      e.currentTarget.style.boxShadow = '0 0 15px rgba(0, 243, 255, 0.25)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isThisLinkActive) {
+                        e.currentTarget.style.borderColor = 'rgba(0, 243, 255, 0.18)';
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                        e.currentTarget.style.boxShadow = 'none';
+                      }
+                    }}
+                  >
+                    <span>{link.label}</span>
+                    <span style={{ color: '#00f3ff', fontSize: '0.85rem' }}>→</span>
+                  </motion.button>
+                );
+              })}
             </div>
 
             <motion.button

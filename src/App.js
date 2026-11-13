@@ -1,7 +1,10 @@
-// src/App.js — Main Developer Portfolio Application
+// src/App.js — Main Developer Portfolio & Freelance Services Application
 import React, { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './index.css';
+
+// Context & Routing
+import { NavigationProvider, useNavigation } from './context/NavigationContext';
 
 // Dedicated Living Browser Hero Workspace
 import HeroWorkspace from './components/hero/HeroWorkspace';
@@ -13,16 +16,23 @@ import {
   PHASES,
 } from './components/UniverseIntro';
 
-// Portfolio Sections
+// Portfolio & Services Sections
 import Navigation from './components/portfolio/Navigation';
+import ServicesSection from './components/portfolio/ServicesSection';
 import ProjectsSection from './components/portfolio/ProjectsSection';
 import ProjectDetail from './components/portfolio/ProjectDetail';
 import AboutSection from './components/portfolio/AboutSection';
 import SkillsSection from './components/portfolio/SkillsSection';
 import ContactSection from './components/portfolio/ContactSection';
 
-export default function App() {
+// Dedicated Freelance Services Pages & Modal
+import ServicesLandingPage from './components/services/ServicesLandingPage';
+import ServiceCategoryPage from './components/services/ServiceCategoryPage';
+import EnquiryModal from './components/services/EnquiryModal';
+
+function PortfolioAppContent() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const { currentPath, enquiryModal, closeEnquiry } = useNavigation();
 
   const {
     phase,
@@ -30,7 +40,14 @@ export default function App() {
     advanceToPhase,
   } = useCinematicOrchestrator();
 
-  // Ensure URL is always clean (http://localhost:3000) with zero hash fragments
+  // If visitor lands directly on a service page, automatically bypass intro
+  useEffect(() => {
+    if (currentPath !== '/' && phase === PHASES.CINEMATIC) {
+      skip();
+    }
+  }, [currentPath, phase, skip]);
+
+  // Keep URL clean without unwanted hash fragments
   useEffect(() => {
     if (window.location.hash) {
       const hashTarget = window.location.hash.replace('#', '');
@@ -78,8 +95,15 @@ export default function App() {
     }, 200);
   }, [advanceToPhase]);
 
-  const isIntroPlaying = phase === PHASES.CINEMATIC;
-  const isPortfolioActive = phase === PHASES.PORTFOLIO;
+  const isIntroPlaying = currentPath === '/' && phase === PHASES.CINEMATIC;
+  const isPortfolioActive = !isIntroPlaying;
+
+  // Determine current service slug if on a /services/:slug route
+  const isServicesLanding = currentPath === '/services';
+  const isServiceCategory = currentPath.startsWith('/services/') && currentPath !== '/services';
+  const categorySlug = isServiceCategory
+    ? currentPath.replace('/services/', '').replace(/\/$/, '')
+    : null;
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#03000a', color: '#f8fafc' }}>
@@ -95,31 +119,55 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* ===== LAYER 2: PERSISTENT NAVIGATION ===== */}
+      {/* ===== LAYER 2: PERSISTENT CYBERPUNK NAVIGATION ===== */}
       {isPortfolioActive && (
         <Navigation onContactClick={handleContact} />
       )}
 
-      {/* ===== LAYER 3: MAIN PORTFOLIO SECTIONS ===== */}
+      {/* ===== LAYER 3: ROUTED CONTENT ===== */}
       {isPortfolioActive && (
         <main>
-          {/* Futuristic Hero with Live Coding Editor Stack & Fixed Bash Terminal */}
-          <HeroWorkspace
-            onContact={handleContact}
-            onSelectProject={setSelectedProject}
-          />
+          {/* Route: Services Landing Page (/services) */}
+          {isServicesLanding && (
+            <>
+              <ServicesLandingPage />
+              <ContactSection />
+            </>
+          )}
 
-          {/* Featured Projects Showcase */}
-          <ProjectsSection onSelectProject={setSelectedProject} />
+          {/* Route: Dedicated Service Category Detail Page (/services/:slug) */}
+          {isServiceCategory && (
+            <>
+              <ServiceCategoryPage slug={categorySlug} />
+              <ContactSection />
+            </>
+          )}
 
-          {/* Architecture & Engineering Workflow */}
-          <AboutSection />
+          {/* Route: Homepage (/) with Hero, Services, Projects, About, Skills & Contact */}
+          {currentPath === '/' && (
+            <>
+              {/* Futuristic Hero with Live Coding Editor Stack & Fixed Bash Terminal */}
+              <HeroWorkspace
+                onContact={handleContact}
+                onSelectProject={setSelectedProject}
+              />
 
-          {/* Technical Skills Universe */}
-          <SkillsSection />
+              {/* Homepage Services & Solutions (Placed immediately above Featured Projects) */}
+              <ServicesSection />
 
-          {/* Contact & Connect Footer */}
-          <ContactSection />
+              {/* Featured Projects Showcase */}
+              <ProjectsSection onSelectProject={setSelectedProject} />
+
+              {/* Architecture & Engineering Workflow */}
+              <AboutSection />
+
+              {/* Technical Skills Universe */}
+              <SkillsSection />
+
+              {/* Contact & Connect Footer */}
+              <ContactSection />
+            </>
+          )}
         </main>
       )}
 
@@ -128,6 +176,22 @@ export default function App() {
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
       />
+
+      {/* Cyberpunk Interactive Project Enquiry Gateway (WhatsApp & Email Dispatch) */}
+      <EnquiryModal
+        isOpen={enquiryModal.isOpen}
+        onClose={closeEnquiry}
+        initialServiceSlug={enquiryModal.serviceSlug}
+        initialPackageId={enquiryModal.packageId}
+      />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationProvider>
+      <PortfolioAppContent />
+    </NavigationProvider>
   );
 }
