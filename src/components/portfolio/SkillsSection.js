@@ -39,7 +39,10 @@ export default function SkillsSection() {
           alignItems: 'center',
           gap: '1rem',
         }}>
-          <span>{"// TECH NETWORK"}</span>
+          <span>
+            <span className="desktop-heading-text">{"// TECH NETWORK"}</span>
+            <span className="mobile-heading-text">{"// SKILLS"}</span>
+          </span>
           <span style={{
             height: 1,
             width: 80,
@@ -56,7 +59,8 @@ export default function SkillsSection() {
           marginBottom: '1rem',
           textShadow: '0 0 20px rgba(0, 243, 255, 0.3)',
         }}>
-          Technical Skills & Tools
+          <span className="desktop-heading-text">Technical Skills & Tools</span>
+          <span className="mobile-heading-text">Skills & Tools</span>
         </h2>
         <p style={{
           fontSize: '1.05rem',

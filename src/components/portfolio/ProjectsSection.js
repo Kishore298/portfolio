@@ -1,12 +1,240 @@
 // src/components/portfolio/ProjectsSection.js
 // Futuristic Showcase for Production Case Studies & Freelance Platforms
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS } from '../../data/projects';
 import ProjectDetail from './ProjectDetail';
 
+function ProjectCardCarousel({ images, title, color }) {
+  const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [touchStartX, setTouchStartX] = useState(null);
+
+  // Autoscroll cycle every 3.2s when not hovered
+  useEffect(() => {
+    if (!images || images.length <= 1 || isHovered) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [images, isHovered]);
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    setIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    setIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const handleDotClick = (e, i) => {
+    e.stopPropagation();
+    setIndex(i);
+  };
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX === null) return;
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (diff > 35) {
+      setIndex((prev) => (prev + 1) % images.length);
+    } else if (diff < -35) {
+      setIndex((prev) => (prev - 1 + images.length) % images.length);
+    }
+    setTouchStartX(null);
+  };
+
+  const handleWheel = (e) => {
+    if (Math.abs(e.deltaX) > 25) {
+      if (e.deltaX > 0) {
+        setIndex((prev) => (prev + 1) % images.length);
+      } else {
+        setIndex((prev) => (prev - 1 + images.length) % images.length);
+      }
+    }
+  };
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onWheel={handleWheel}
+      style={{
+        height: 175,
+        position: 'relative',
+        overflow: 'hidden',
+        background: '#070214',
+        borderBottom: `1px solid ${color}35`,
+      }}
+    >
+      {/* Images container with smooth fade transition */}
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt={`${title} preview ${i + 1}`}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'top center',
+              opacity: i === index ? 1 : 0,
+              transform: i === index ? 'scale(1)' : 'scale(1.05)',
+              transition: 'opacity 0.45s ease, transform 0.6s ease',
+              pointerEvents: 'none',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Cyber gradient vignette overlays */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(5, 1, 15, 0.4) 0%, transparent 30%, transparent 65%, rgba(5, 1, 15, 0.85) 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Image Counter Badge */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 8,
+          right: 8,
+          background: 'rgba(9, 3, 24, 0.82)',
+          border: `1px solid ${color}60`,
+          borderRadius: '9999px',
+          padding: '0.15rem 0.55rem',
+          fontSize: '0.62rem',
+          fontFamily: 'JetBrains Mono, monospace',
+          color: '#ffffff',
+          backdropFilter: 'blur(8px)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          zIndex: 3,
+        }}
+      >
+        <span style={{ color, fontSize: '0.5rem' }}>●</span>
+        <span>{index + 1} / {images.length}</span>
+      </div>
+
+      {/* Manual Navigation Arrows */}
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={handlePrev}
+            style={{
+              position: 'absolute',
+              left: 6,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 26,
+              height: 26,
+              borderRadius: '50%',
+              background: 'rgba(9, 3, 24, 0.85)',
+              border: `1px solid ${color}80`,
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontSize: '0.95rem',
+              lineHeight: 1,
+              zIndex: 4,
+              boxShadow: `0 0 10px rgba(0,0,0,0.8), 0 0 8px ${color}40`,
+              transition: 'all 0.2s ease',
+            }}
+            title="Previous Screenshot"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            style={{
+              position: 'absolute',
+              right: 6,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: 26,
+              height: 26,
+              borderRadius: '50%',
+              background: 'rgba(9, 3, 24, 0.85)',
+              border: `1px solid ${color}80`,
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontSize: '0.95rem',
+              lineHeight: 1,
+              zIndex: 4,
+              boxShadow: `0 0 10px rgba(0,0,0,0.8), 0 0 8px ${color}40`,
+              transition: 'all 0.2s ease',
+            }}
+            title="Next Screenshot"
+          >
+            ›
+          </button>
+
+          {/* Indicator Dots */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 8,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              gap: '5px',
+              zIndex: 3,
+            }}
+          >
+            {images.map((_, dotIdx) => (
+              <span
+                key={dotIdx}
+                onClick={(e) => handleDotClick(e, dotIdx)}
+                style={{
+                  width: dotIdx === index ? 16 : 6,
+                  height: 5,
+                  borderRadius: '3px',
+                  background: dotIdx === index ? color : 'rgba(255, 255, 255, 0.35)',
+                  boxShadow: dotIdx === index ? `0 0 8px ${color}` : 'none',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function ProjectCard({ project, onClick }) {
   const isFlagship = project.projectType === 'flagship';
+  const hasImages = project.showcaseImages && project.showcaseImages.length > 0;
 
   return (
     <motion.div
@@ -79,35 +307,43 @@ function ProjectCard({ project, onClick }) {
         </span>
       </div>
 
-      {/* Holographic Preview Area */}
-      <div style={{
-        height: 135,
-        background: `radial-gradient(circle at center, ${project.color}22 0%, rgba(10, 4, 24, 0.95) 85%)`,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
-        padding: '0 1rem',
-      }}>
-        <span style={{ fontSize: '2.8rem', marginBottom: '0.3rem', filter: `drop-shadow(0 0 15px ${project.color})` }}>
-          {project.icon}
-        </span>
-        <span style={{
-          fontFamily: 'JetBrains Mono, monospace',
-          fontSize: '0.65rem',
-          color: project.color,
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-          fontWeight: 700,
-          textAlign: 'center',
-          lineHeight: 1.3,
+      {/* Visual Showcase: Interactive Carousel with Autoscroll + Manual Scroll, or Holographic Fallback */}
+      {hasImages ? (
+        <ProjectCardCarousel
+          images={project.showcaseImages}
+          title={project.title}
+          color={project.color}
+        />
+      ) : (
+        <div style={{
+          height: 175,
+          background: `radial-gradient(circle at center, ${project.color}22 0%, rgba(10, 4, 24, 0.95) 85%)`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+          padding: '0 1rem',
         }}>
-          {project.presentation}
-        </span>
-      </div>
+          <span style={{ fontSize: '2.8rem', marginBottom: '0.3rem', filter: `drop-shadow(0 0 15px ${project.color})` }}>
+            {project.icon}
+          </span>
+          <span style={{
+            fontFamily: 'JetBrains Mono, monospace',
+            fontSize: '0.65rem',
+            color: project.color,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            fontWeight: 700,
+            textAlign: 'center',
+            lineHeight: 1.3,
+          }}>
+            {project.presentation}
+          </span>
+        </div>
+      )}
 
       {/* Project Metadata */}
       <div style={{
@@ -354,7 +590,10 @@ export default function ProjectsSection({ onSelectProject }) {
           alignItems: 'center',
           gap: '1rem',
         }}>
-          <span>{"// PRODUCTION CASE STUDIES & FREELANCE PLATFORMS"}</span>
+          <span>
+            <span className="desktop-heading-text">{"// PRODUCTION CASE STUDIES & FREELANCE PLATFORMS"}</span>
+            <span className="mobile-heading-text">{"// PROJECTS & CASE STUDIES"}</span>
+          </span>
           <span style={{
             flex: 1,
             height: 1,
@@ -371,7 +610,8 @@ export default function ProjectsSection({ onSelectProject }) {
           marginBottom: '1rem',
           textShadow: '0 0 20px rgba(0, 243, 255, 0.3)',
         }}>
-          Featured Projects & Case Studies
+          <span className="desktop-heading-text">Featured Projects & Case Studies</span>
+          <span className="mobile-heading-text">Featured Projects</span>
         </h2>
         <p style={{
           fontSize: '1.05rem',

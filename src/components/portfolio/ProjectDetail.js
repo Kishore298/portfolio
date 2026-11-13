@@ -1,7 +1,186 @@
 // src/components/portfolio/ProjectDetail.js
 // Interactive Deep-Dive Case Study Modal
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+
+function CaseStudyShowcase({ images, projectTitle, accentColor }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Autoscroll every 3.8s when not hovered
+  useEffect(() => {
+    if (!images || images.length <= 1 || isPaused) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % images.length);
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [images, isPaused]);
+
+  if (!images || images.length === 0) return null;
+
+  return (
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      style={{
+        background: 'rgba(12, 5, 30, 0.95)',
+        border: `1px solid ${accentColor}40`,
+        borderRadius: '0.75rem',
+        padding: '1rem',
+        marginBottom: '1.75rem',
+        boxShadow: `0 0 25px ${accentColor}18, 0 15px 35px rgba(0, 0, 0, 0.7)`,
+      }}
+    >
+      {/* Header bar */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '0.75rem',
+        fontSize: '0.72rem',
+        fontFamily: 'JetBrains Mono, monospace',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: accentColor, fontWeight: 700 }}>
+          <span>{"// PLATFORM SHOWCASE"}</span>
+          <span style={{ color: '#64748b' }}>•</span>
+          <span style={{ color: '#cbd5e1' }}>Live Screenshots</span>
+        </div>
+        <div style={{
+          padding: '0.2rem 0.6rem',
+          borderRadius: '9999px',
+          background: `${accentColor}18`,
+          border: `1px solid ${accentColor}40`,
+          color: '#ffffff',
+          fontWeight: 600,
+        }}>
+          {activeIdx + 1} / {images.length}
+        </div>
+      </div>
+
+      {/* Main Preview Screen */}
+      <div style={{
+        position: 'relative',
+        width: '100%',
+        height: 'clamp(220px, 42vh, 420px)',
+        background: '#04010a',
+        borderRadius: '0.5rem',
+        overflow: 'hidden',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <img
+          src={images[activeIdx]}
+          alt={`${projectTitle} screenshot ${activeIdx + 1}`}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            transition: 'opacity 0.3s ease',
+          }}
+        />
+
+        {/* Navigation Arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => setActiveIdx((prev) => (prev - 1 + images.length) % images.length)}
+              style={{
+                position: 'absolute',
+                left: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: 32,
+                height: 32,
+                borderRadius: '50%',
+                background: 'rgba(10, 4, 26, 0.85)',
+                border: `1px solid ${accentColor}80`,
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: '1.1rem',
+                boxShadow: `0 0 12px ${accentColor}30`,
+              }}
+              title="Previous Screenshot"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveIdx((prev) => (prev + 1) % images.length)}
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                width: 32,
+                height: 32,
+                borderRadius: '50%',
+                background: 'rgba(10, 4, 26, 0.85)',
+                border: `1px solid ${accentColor}80`,
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                fontSize: '1.1rem',
+                boxShadow: `0 0 12px ${accentColor}30`,
+              }}
+              title="Next Screenshot"
+            >
+              ›
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Thumbnails Row */}
+      {images.length > 1 && (
+        <div style={{
+          display: 'flex',
+          gap: '0.6rem',
+          marginTop: '0.75rem',
+          overflowX: 'auto',
+          paddingBottom: '0.25rem',
+        }}>
+          {images.map((thumb, tIdx) => {
+            const isActive = tIdx === activeIdx;
+            return (
+              <button
+                key={tIdx}
+                type="button"
+                onClick={() => setActiveIdx(tIdx)}
+                style={{
+                  flex: '0 0 80px',
+                  height: 52,
+                  borderRadius: '0.35rem',
+                  overflow: 'hidden',
+                  padding: 0,
+                  background: '#04010a',
+                  border: `2px solid ${isActive ? accentColor : 'rgba(255, 255, 255, 0.12)'}`,
+                  boxShadow: isActive ? `0 0 12px ${accentColor}60` : 'none',
+                  cursor: 'pointer',
+                  opacity: isActive ? 1 : 0.6,
+                  transition: 'all 0.2s ease',
+                }}
+              >
+                <img
+                  src={thumb}
+                  alt={`Thumbnail ${tIdx + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ProjectDetail({ project, onClose }) {
   if (!project) return null;
@@ -22,7 +201,7 @@ export default function ProjectDetail({ project, onClose }) {
         justifyContent: 'center',
         background: 'rgba(3, 1, 10, 0.88)',
         backdropFilter: 'blur(16px)',
-        padding: '1.5rem',
+        padding: 'clamp(0.5rem, 2.5vw, 1.5rem)',
       }}
       onClick={onClose}
     >
@@ -108,7 +287,7 @@ export default function ProjectDetail({ project, onClose }) {
         </div>
 
         {/* Modal Scrollable Content */}
-        <div style={{ padding: '2rem 2.25rem', overflowY: 'auto' }}>
+        <div id="modal-scroll-container" style={{ padding: 'clamp(1rem, 3.5vw, 2.25rem)', overflowY: 'auto' }}>
           {/* Header */}
           <div style={{ marginBottom: '1.75rem' }}>
             <div style={{
@@ -177,6 +356,15 @@ export default function ProjectDetail({ project, onClose }) {
             }}>
               {project.longDescription}
             </p>
+
+            {/* Project Showcase Images Gallery */}
+            {project.showcaseImages && project.showcaseImages.length > 0 && (
+              <CaseStudyShowcase
+                images={project.showcaseImages}
+                projectTitle={project.title}
+                accentColor={accentColor}
+              />
+            )}
 
             {/* Architecture Banner */}
             <div style={{

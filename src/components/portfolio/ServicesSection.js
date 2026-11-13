@@ -31,7 +31,10 @@ export default function ServicesSection() {
             gap: '1rem',
           }}
         >
-          <span>{"// SERVICES & SOLUTIONS"}</span>
+          <span>
+            <span className="desktop-heading-text">{"// SERVICES & SOLUTIONS"}</span>
+            <span className="mobile-heading-text">{"// SERVICES"}</span>
+          </span>
           <span
             style={{
               flex: 1,
@@ -53,7 +56,8 @@ export default function ServicesSection() {
             textShadow: '0 0 20px rgba(0, 243, 255, 0.3)',
           }}
         >
-          What I Can Build For You.
+          <span className="desktop-heading-text">What I Can Build For You.</span>
+          <span className="mobile-heading-text">What I Can Build</span>
         </h2>
 
         <p

@@ -424,3 +424,17 @@ canvas {
     display: none !important;
   }
 }
+
+/* ===== RESPONSIVE HEADINGS (<= 768px Mobile & Mid Devices) ===== */
+.mobile-heading-text {
+  display: none;
+}
+@media (max-width: 768px) {
+  .desktop-heading-text {
+    display: none !important;
+  }
+  .mobile-heading-text {
+    display: inline !important;
+  }
+}
+

@@ -57,7 +57,8 @@ export default function ContactSection() {
           textTransform: 'uppercase',
           marginBottom: '1rem',
         }}>
-          {"// CONTACT GATEWAY"}
+          <span className="desktop-heading-text">{"// CONTACT GATEWAY"}</span>
+          <span className="mobile-heading-text">{"// CONTACT"}</span>
         </div>
         <h2 style={{
           fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
@@ -68,7 +69,8 @@ export default function ContactSection() {
           marginBottom: '1rem',
           textShadow: '0 0 25px rgba(0, 243, 255, 0.35)',
         }}>
-          Have an idea worth building?
+          <span className="desktop-heading-text">Have an idea worth building?</span>
+          <span className="mobile-heading-text">Let's Connect</span>
         </h2>
         <p style={{
           fontSize: '1.15rem',

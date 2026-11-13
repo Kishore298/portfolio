@@ -39,7 +39,10 @@ export default function AboutSection() {
             alignItems: 'center',
             gap: '1rem',
           }}>
-            <span>{"// FULL-STACK DEVELOPMENT & WORKFLOW"}</span>
+            <span>
+              <span className="desktop-heading-text">{"// FULL-STACK DEVELOPMENT & WORKFLOW"}</span>
+              <span className="mobile-heading-text">{"// DEV WORKFLOW"}</span>
+            </span>
             <span style={{
               height: 1,
               width: 80,
@@ -57,7 +60,8 @@ export default function AboutSection() {
             marginBottom: '1.25rem',
             textShadow: '0 0 20px rgba(0, 243, 255, 0.25)',
           }}>
-            Full-Stack Web Development
+            <span className="desktop-heading-text">Full-Stack Web Development</span>
+            <span className="mobile-heading-text">Full-Stack Development</span>
           </h2>
 
           <div style={{ color: '#cbd5e1', lineHeight: 1.75, fontSize: '0.94rem' }}>
@@ -99,17 +103,26 @@ export default function AboutSection() {
         >
           <div style={{
             fontFamily: 'JetBrains Mono, monospace',
-            fontSize: '0.72rem',
+            fontSize: 'clamp(0.62rem, 1.8vw, 0.72rem)',
             color: '#ec4899',
             fontWeight: 700,
-            letterSpacing: '0.15em',
+            letterSpacing: '0.08em',
             marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            whiteSpace: 'nowrap',
+            gap: '0.5rem',
+            width: '100%',
           }}>
-            <span>{"// END-TO-END DATAFLOW PIPELINE"}</span>
-            <span style={{ color: '#00f3ff' }}>● PRODUCTION READY</span>
+            <span style={{ whiteSpace: 'nowrap' }}>
+              <span className="desktop-heading-text">{"// END-TO-END DATAFLOW PIPELINE"}</span>
+              <span className="mobile-heading-text">{"// DATAFLOW PIPELINE"}</span>
+            </span>
+            <span style={{ color: '#00f3ff', whiteSpace: 'nowrap' }}>
+              <span className="desktop-heading-text">● PRODUCTION READY</span>
+              <span className="mobile-heading-text">● PROD READY</span>
+            </span>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>

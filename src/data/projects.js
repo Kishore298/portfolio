@@ -245,6 +245,13 @@ export const PROJECTS = [
     icon: '🎆',
     color: '#ec4899', // Vibrant magenta
     colorDim: 'rgba(236, 72, 153, 0.2)',
+    mainImage: '/main_vcrackers.png',
+    showcaseImages: [
+      '/main_vcrackers.png',
+      '/showcase_vcrackers.png',
+      '/showcase_vcrackers1.png',
+      '/showcase_vcrackers2.png',
+    ],
     stats: {
       metric: 'Storefront + Admin Panel',
       perf: 'cPanel & MilesWeb Deployed',
@@ -335,6 +342,11 @@ export const PROJECTS = [
     icon: '🛒',
     color: '#3b82f6', // Neon blue
     colorDim: 'rgba(59, 130, 246, 0.2)',
+    mainImage: '/main_leocrackers.png',
+    showcaseImages: [
+      '/main_leocrackers.png',
+      '/showcase_leocracker.png',
+    ],
     stats: {
       metric: 'Order Lifecycle Sync',
       perf: 'cPanel & MilesWeb Deployed',
@@ -512,6 +524,12 @@ export const PROJECTS = [
     icon: '🌸',
     color: '#f43f5e', // Rose neon
     colorDim: 'rgba(244, 63, 94, 0.2)',
+    mainImage: '/main_muthuspetals.png',
+    showcaseImages: [
+      '/main_muthuspetals.png',
+      '/showcase_muthuspetals.png',
+      '/showcase_muthuspetals1.png',
+    ],
     stats: {
       metric: 'Retail Product Showcase',
       perf: 'cPanel & MilesWeb Deployed',
@@ -600,6 +618,12 @@ export const PROJECTS = [
     icon: '✨',
     color: '#eab308', // Amber gold neon
     colorDim: 'rgba(234, 179, 8, 0.2)',
+    mainImage: '/main_prettyglitz.png',
+    showcaseImages: [
+      '/main_prettyglitz.png',
+      '/showcase_prettyglitz.png',
+      '/showcase_prettyglitz1.png',
+    ],
     stats: {
       metric: 'Fashion Accessories Grid',
       perf: 'cPanel & MilesWeb Deployed',
