@@ -238,14 +238,17 @@ export function UnifiedIntroScreen({ onExplore, onContact, onSkip }) {
       style={{
         position: 'fixed',
         inset: 0,
+        width: '100%',
+        maxWidth: '100vw',
         zIndex: 40,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '2rem 1.5rem',
+        padding: 'clamp(1rem, 3vw, 2rem) clamp(0.75rem, 3vw, 1.5rem)',
         background: '#03000a',
         overflow: 'hidden',
+        boxSizing: 'border-box',
       }}
     >
       {/* Ambient Atmospheric Radial Lighting (NO LINES, pure soft deep glows) */}
@@ -318,13 +321,15 @@ export function UnifiedIntroScreen({ onExplore, onContact, onSkip }) {
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          maxWidth: '1100px',
+          maxWidth: '100%',
           width: '100%',
           marginTop: 'auto',
           marginBottom: 'auto',
           padding: '1rem 0',
           position: 'relative',
           zIndex: 10,
+          overflow: 'hidden',
+          boxSizing: 'border-box',
         }}
       >
         {/* 1. Header Tag */}

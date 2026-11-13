@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigation } from '../../context/NavigationContext';
 
 const NAV_LINKS = [
+  { targetId: 'about', label: '// ABOUT' },
   { targetId: 'services', label: '// SERVICES', path: '/services' },
   { targetId: 'projects', label: '// PROJECTS' },
-  { targetId: 'about', label: '// ABOUT' },
   { targetId: 'skills', label: '// SKILLS' },
   { targetId: 'contact', label: '// CONTACT' },
 ];
@@ -115,6 +115,9 @@ export default function Navigation({ visible = true, onContactClick }) {
           top: 0,
           left: 0,
           right: 0,
+          width: '100%',
+          maxWidth: '100%',
+          boxSizing: 'border-box',
           zIndex: 99,
           padding: '0.85rem clamp(1rem, 3vw, 2.5rem)',
           display: 'flex',
@@ -311,6 +314,9 @@ export default function Navigation({ visible = true, onContactClick }) {
               top: '60px',
               left: 0,
               right: 0,
+              width: '100%',
+              maxWidth: '100%',
+              boxSizing: 'border-box',
               zIndex: 98,
               background: 'rgba(8, 2, 24, 0.98)',
               backdropFilter: 'blur(20px)',

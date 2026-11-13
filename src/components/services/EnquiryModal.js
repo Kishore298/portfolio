@@ -134,10 +134,11 @@ export default function EnquiryModal({ isOpen, onClose, initialServiceSlug, init
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '1.25rem',
+          padding: 'clamp(0.5rem, 2vw, 1.25rem)',
           background: 'rgba(3, 0, 10, 0.88)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
+          boxSizing: 'border-box',
         }}
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
@@ -258,9 +259,11 @@ export default function EnquiryModal({ isOpen, onClose, initialServiceSlug, init
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
                 gap: '1rem',
                 marginBottom: '1rem',
+                width: '100%',
+                boxSizing: 'border-box',
               }}
             >
               {/* Service Select */}
@@ -353,9 +356,11 @@ export default function EnquiryModal({ isOpen, onClose, initialServiceSlug, init
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
                 gap: '1rem',
                 marginBottom: '1rem',
+                width: '100%',
+                boxSizing: 'border-box',
               }}
             >
               <div>
@@ -435,9 +440,11 @@ export default function EnquiryModal({ isOpen, onClose, initialServiceSlug, init
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
                 gap: '1rem',
                 marginBottom: '1rem',
+                width: '100%',
+                boxSizing: 'border-box',
               }}
             >
               <div>
@@ -653,3 +660,4 @@ export default function EnquiryModal({ isOpen, onClose, initialServiceSlug, init
     </AnimatePresence>
   );
 }
+

@@ -14,9 +14,12 @@ const CATEGORY_COLORS = {
 export default function SkillsSection() {
   return (
     <section id="skills" style={{
-      padding: '7rem 2rem',
+      padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 3vw, 2rem)',
       maxWidth: 1200,
+      width: '100%',
       margin: '0 auto',
+      boxSizing: 'border-box',
+      overflow: 'hidden',
     }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -68,8 +71,10 @@ export default function SkillsSection() {
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
-        gap: '1.25rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+        gap: 'clamp(1rem, 2.5vw, 1.25rem)',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         {Object.entries(SKILLS).map(([category, items], catIndex) => {
           const color = CATEGORY_COLORS[category] || '#00f3ff';

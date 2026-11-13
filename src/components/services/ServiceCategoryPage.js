@@ -96,7 +96,7 @@ export default function ServiceCategoryPage({ slug }) {
         }}
       />
 
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1240, width: '100%', margin: '0 auto', padding: '0 clamp(1rem, 3vw, 2rem)', position: 'relative', zIndex: 1, boxSizing: 'border-box', overflow: 'hidden' }}>
         {/* Breadcrumb Navigation */}
         <div
           style={{
@@ -363,9 +363,11 @@ export default function ServiceCategoryPage({ slug }) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '1.75rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+              gap: 'clamp(1.25rem, 3vw, 1.75rem)',
               alignItems: 'stretch',
+              width: '100%',
+              boxSizing: 'border-box',
             }}
           >
             {service.packages.map((pkg, idx) => {
@@ -1232,8 +1234,10 @@ export default function ServiceCategoryPage({ slug }) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '1.25rem',
+              width: '100%',
+              boxSizing: 'border-box',
             }}
           >
             <div>

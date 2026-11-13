@@ -25,7 +25,7 @@ export default function ServicesLandingPage() {
         }}
       />
 
-      <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1240, width: '100%', margin: '0 auto', padding: '0 clamp(1rem, 3vw, 2rem)', position: 'relative', zIndex: 1, boxSizing: 'border-box', overflow: 'hidden' }}>
         {/* Breadcrumb Navigation */}
         <div
           style={{
@@ -158,9 +158,11 @@ export default function ServicesLandingPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-            gap: '2rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+            gap: 'clamp(1.25rem, 3vw, 2rem)',
             marginBottom: '4.5rem',
+            width: '100%',
+            boxSizing: 'border-box',
           }}
         >
           {SERVICES.map((service, index) => (
@@ -536,8 +538,10 @@ export default function ServicesLandingPage() {
               paddingTop: '1.25rem',
               borderTop: '1px solid rgba(255, 255, 255, 0.08)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '1.25rem',
+              width: '100%',
+              boxSizing: 'border-box',
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '0.7rem',
               color: '#94a3b8',
@@ -559,3 +563,4 @@ export default function ServicesLandingPage() {
     </div>
   );
 }
+

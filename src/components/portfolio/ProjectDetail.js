@@ -328,7 +328,7 @@ export default function ProjectDetail({ project, onClose }) {
                 {"// CATEGORIZED TECHNOLOGY STACK"}
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '1rem', width: '100%', boxSizing: 'border-box' }}>
                 {Object.entries(project.techCategories).map(([cat, tools]) => (
                   <div
                     key={cat}

@@ -1067,3 +1067,4 @@ export const SERVICES = [
 export function getServiceBySlug(slug) {
   return SERVICES.find((s) => s.slug === slug) || null;
 }
+

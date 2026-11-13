@@ -340,9 +340,11 @@ export default function EditorStack() {
         position: 'relative',
         width: '100%',
         maxWidth: '680px',
-        minWidth: '260px',
+        minWidth: 0,
         height: '380px',
         perspective: '1200px',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
       }}
     >
       {/* Stacked Editor Windows Layered in 3D */}
@@ -353,22 +355,23 @@ export default function EditorStack() {
 
         // Visual transforms for genuine stacking depth (compact on mobile to avoid overflow)
         const isMobileScreen = typeof window !== 'undefined' && window.innerWidth < 640;
-        let xOffset = isMobileScreen ? relIdx * 6 : relIdx * 18;
-        let yOffset = isMobileScreen ? -relIdx * 8 : -relIdx * 14;
+        let xOffset = isMobileScreen ? relIdx * 2 : relIdx * 12;
+        let yOffset = isMobileScreen ? -relIdx * 6 : -relIdx * 12;
         let scale = 1 - relIdx * 0.04;
         let opacity = isForeground ? 1 : Math.max(0.18, 0.85 - relIdx * 0.2);
         let zIndex = 10 - relIdx * 2;
         let rotateY = isMobileScreen ? 0 : -relIdx * 2;
+        const swipeDistance = isMobileScreen ? 90 : 260;
 
         return (
           <motion.div
             key={file.filename}
             animate={{
-              x: isForeground && isSwiping ? 340 : xOffset,
-              y: isForeground && isSwiping ? 12 : yOffset,
-              scale: isForeground && isSwiping ? 0.9 : scale,
+              x: isForeground && isSwiping ? swipeDistance : xOffset,
+              y: isForeground && isSwiping ? 8 : yOffset,
+              scale: isForeground && isSwiping ? 0.92 : scale,
               opacity: isForeground && isSwiping ? 0 : opacity,
-              rotateY: isForeground && isSwiping ? 24 : rotateY,
+              rotateY: isForeground && isSwiping ? 18 : rotateY,
             }}
             transition={{
               duration: 0.65,
@@ -396,6 +399,7 @@ export default function EditorStack() {
               fontFamily: 'JetBrains Mono, monospace',
               backdropFilter: 'blur(16px)',
               pointerEvents: isForeground ? 'auto' : 'auto',
+              boxSizing: 'border-box',
             }}
           >
             {/* Window Titlebar & File Tabs */}
@@ -430,6 +434,10 @@ export default function EditorStack() {
                   fontSize: '0.7rem',
                   color: isForeground ? '#ffffff' : '#94a3b8',
                   fontWeight: 600,
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: '160px',
                 }}
               >
                 <span>{file.icon}</span>
@@ -445,6 +453,10 @@ export default function EditorStack() {
                   textTransform: 'uppercase',
                   fontWeight: 700,
                   marginLeft: 'auto',
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  maxWidth: '110px',
                 }}
               >
                 {file.category}

@@ -6,12 +6,14 @@ import { TECH_DATAFLOW } from '../../data/projects';
 
 export default function AboutSection() {
   return (
-    <section id="about" style={{ padding: '6.5rem 2rem', maxWidth: 1240, margin: '0 auto' }}>
+    <section id="about" style={{ padding: 'clamp(4rem, 8vw, 6.5rem) clamp(1rem, 3vw, 2rem)', maxWidth: 1240, width: '100%', margin: '0 auto', boxSizing: 'border-box', overflow: 'hidden' }}>
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
-        gap: '3.5rem',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+        gap: 'clamp(1.75rem, 4vw, 3.5rem)',
         alignItems: 'center',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         {/* Left Column: Biography & Development philosophy */}
         <motion.div
@@ -84,11 +86,15 @@ export default function AboutSection() {
             background: 'rgba(16, 7, 36, 0.88)',
             border: '1px solid rgba(0, 243, 255, 0.3)',
             borderRadius: '1rem',
-            padding: '1.8rem 1.8rem',
+            padding: 'clamp(1.1rem, 3vw, 1.8rem)',
             boxShadow: '0 0 35px rgba(0, 243, 255, 0.12), 0 20px 50px rgba(0,0,0,0.7)',
             backdropFilter: 'blur(16px)',
             display: 'flex',
             flexDirection: 'column',
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box',
+            overflow: 'hidden',
           }}
         >
           <div style={{

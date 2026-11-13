@@ -70,6 +70,10 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
       style={{
         position: 'relative',
         minHeight: '100vh',
+        width: '100%',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
         paddingTop: '5rem',
         paddingBottom: '3.5rem',
         display: 'flex',
@@ -93,31 +97,31 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
         }}
       />
 
-      {/* Ambient Neon Blobs */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '15%',
-          left: '15%',
-          width: '380px',
-          height: '380px',
-          background: 'radial-gradient(circle, rgba(0, 243, 255, 0.08) 0%, transparent 70%)',
-          filter: 'blur(45px)',
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '20%',
-          right: '12%',
-          width: '420px',
-          height: '420px',
-          background: 'radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-          pointerEvents: 'none',
-        }}
-      />
+      {/* Ambient Neon Blobs (strictly clipped) */}
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '15%',
+            left: '10%',
+            width: 'clamp(240px, 35vw, 380px)',
+            height: 'clamp(240px, 35vw, 380px)',
+            background: 'radial-gradient(circle, rgba(0, 243, 255, 0.08) 0%, transparent 70%)',
+            filter: 'blur(45px)',
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '15%',
+            right: '5%',
+            width: 'clamp(260px, 40vw, 420px)',
+            height: 'clamp(260px, 40vw, 420px)',
+            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+      </div>
 
       {/* 1. Hero Content & Identity Presentation */}
       <div
@@ -232,9 +236,11 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
           perspective: '1300px',
           width: '100%',
           maxWidth: '1240px',
-          padding: '0 1.5rem',
+          padding: '0 clamp(0.75rem, 3vw, 1.5rem)',
           position: 'relative',
           zIndex: 4,
+          boxSizing: 'border-box',
+          overflow: 'hidden',
         }}
       >
         <div
@@ -242,23 +248,27 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: '2rem',
+            gap: 'clamp(1rem, 3vw, 2rem)',
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
+            maxWidth: '100%',
             transition: 'transform 0.05s linear',
             transformStyle: 'preserve-3d',
+            boxSizing: 'border-box',
           }}
         >
           {/* Left Column: Fixed Cyber Bash Terminal (Independent continuous telemetry loop) */}
           <div
             style={{
-              flex: '1 1 320px',
+              flex: '1 1 290px',
               maxWidth: '380px',
               width: '100%',
+              minWidth: 0,
               display: 'flex',
               justifyContent: 'center',
               transform: 'translateZ(10px)',
+              boxSizing: 'border-box',
             }}
           >
             <FixedBashTerminal />
@@ -267,10 +277,12 @@ export default function HeroWorkspace({ onContact, onSelectProject }) {
           {/* Right/Center Column: 3D Layered Code Editor Stack (40-50% width, 5-file swipe deck) */}
           <div
             style={{
-              flex: '1 1 480px',
+              flex: '1 1 310px',
               maxWidth: '680px',
               width: '100%',
+              minWidth: 0,
               transform: 'translateZ(30px)',
+              boxSizing: 'border-box',
             }}
           >
             <EditorStack />

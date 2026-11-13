@@ -39,7 +39,7 @@ const CONTACTS = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" style={{ padding: '7rem 2rem 5rem', maxWidth: 1200, margin: '0 auto' }}>
+    <section id="contact" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 3vw, 2rem) 5rem', maxWidth: 1200, width: '100%', margin: '0 auto', boxSizing: 'border-box', overflow: 'hidden' }}>
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -128,7 +128,7 @@ export default function ContactSection() {
         </div>
 
         {/* Body */}
-        <div style={{ padding: '2.5rem', textAlign: 'center' }}>
+        <div style={{ padding: 'clamp(1.25rem, 4vw, 2.5rem)', textAlign: 'center', boxSizing: 'border-box' }}>
           <div style={{
             fontSize: '2.5rem',
             marginBottom: '1rem',

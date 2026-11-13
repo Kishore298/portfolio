@@ -334,7 +334,7 @@ export default function ProjectsSection({ onSelectProject }) {
   });
 
   return (
-    <section id="projects" style={{ padding: '7rem 2rem', maxWidth: 1240, margin: '0 auto' }}>
+    <section id="projects" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 3vw, 2rem)', maxWidth: 1240, width: '100%', margin: '0 auto', boxSizing: 'border-box', overflow: 'hidden' }}>
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -424,8 +424,10 @@ export default function ProjectsSection({ onSelectProject }) {
       {/* Projects Grid */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-        gap: '2rem',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 300px), 1fr))',
+        gap: 'clamp(1.25rem, 3vw, 2rem)',
+        width: '100%',
+        boxSizing: 'border-box',
       }}>
         {filteredProjects.map((project) => (
           <ProjectCard

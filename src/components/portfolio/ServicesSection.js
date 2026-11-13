@@ -9,7 +9,7 @@ export default function ServicesSection() {
   const { navigate } = useNavigation();
 
   return (
-    <section id="services" style={{ padding: '7rem 2rem 5rem', maxWidth: 1240, margin: '0 auto' }}>
+    <section id="services" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1rem, 3vw, 2rem)', maxWidth: 1240, width: '100%', margin: '0 auto', boxSizing: 'border-box', overflow: 'hidden' }}>
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -73,9 +73,11 @@ export default function ServicesSection() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '1.75rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.25rem, 3vw, 1.75rem)',
           marginBottom: '3.5rem',
+          width: '100%',
+          boxSizing: 'border-box',
         }}
       >
         {SERVICES.map((service, index) => (
@@ -385,3 +387,4 @@ export default function ServicesSection() {
     </section>
   );
 }
+

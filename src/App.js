@@ -106,7 +106,7 @@ function PortfolioAppContent() {
     : null;
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', background: '#03000a', color: '#f8fafc' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', width: '100%', maxWidth: '100%', overflowX: 'hidden', background: '#03000a', color: '#f8fafc' }}>
       {/* ===== LAYER 1: UNIFIED SINGLE-SCREEN DEVELOPER SHOWCASE (LINE-FREE, NO THREE.JS) ===== */}
       <AnimatePresence>
         {isIntroPlaying && (
@@ -126,7 +126,7 @@ function PortfolioAppContent() {
 
       {/* ===== LAYER 3: ROUTED CONTENT ===== */}
       {isPortfolioActive && (
-        <main>
+        <main style={{ width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
           {/* Route: Services Landing Page (/services) */}
           {isServicesLanding && (
             <>
@@ -143,7 +143,7 @@ function PortfolioAppContent() {
             </>
           )}
 
-          {/* Route: Homepage (/) with Hero, Services, Projects, About, Skills & Contact */}
+          {/* Route: Homepage (/) with Hero, About, Services, Projects, Skills & Contact */}
           {currentPath === '/' && (
             <>
               {/* Futuristic Hero with Live Coding Editor Stack & Fixed Bash Terminal */}
@@ -152,14 +152,14 @@ function PortfolioAppContent() {
                 onSelectProject={setSelectedProject}
               />
 
+              {/* Architecture & Engineering Workflow (Moved immediately below Hero) */}
+              <AboutSection />
+
               {/* Homepage Services & Solutions (Placed immediately above Featured Projects) */}
               <ServicesSection />
 
               {/* Featured Projects Showcase */}
               <ProjectsSection onSelectProject={setSelectedProject} />
-
-              {/* Architecture & Engineering Workflow */}
-              <AboutSection />
 
               {/* Technical Skills Universe */}
               <SkillsSection />
